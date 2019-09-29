@@ -9,13 +9,13 @@ let countIndex = 0;
 let lastRow;
 let lastCol;
 let countRow = 2;
-let ward = ["Ward7", "Ward9", "Ward10", "Ward11"];
-let colStart = ["Student!A", "Student!B", "Student!C", "Student!D"];
+let ward = ["ward7", "ward9", "ward10", "ward11"];
+let colStart = ["IVBox!A", "IVBox!B", "IVBox!C", "IVBox!D"];
 let colStop = [":A", ":B", ":C", ":D"];
 let checkOff = 0;
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://fir-sheet-9cb79.firebaseio.com"
+  databaseURL: "https://esp-8266-f9ffa.firebaseio.com"
 });
 
 // Get Google Sheets instance
@@ -31,7 +31,7 @@ const jwtClient = new google.auth.JWT({
 
 // Get data from RTDB
 exports.copyStudentToSheet = functions.database
-  .ref("/Student")
+  .ref("/")
   .onUpdate(async change => {
     let checkColName = false;
     let data = change.after.val();
@@ -79,7 +79,7 @@ exports.copyStudentToSheet = functions.database
       // Create Google Sheets request
       let request = {
         auth: jwtClient,
-        spreadsheetId: "1W06ph4_68mKiPO1HyDqP7Zuhg27cZ9Z4xiqfsH3u834",
+        spreadsheetId: "1R5N0XkCDZEwJM4Rmonvj_M3teRp-cRdwCZwuUhzW53A",
         range: colStart[countIndex] + countRow + colStop[countIndex] + countRow,
         valueInputOption: "RAW",
         requestBody: {
